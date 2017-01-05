@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	    <title></title>
+	    <link rel="stylesheet" href="http://www.raleighnc.gov/cor-layout/content/static/styles/main.css"/>
+	    <style>
+	    	#map {
+	    		width: 100%;
+	    		height: 500px;
+	    	}
+	    	#schedule {
+	    		width: 100%;
+	    	}
+	    	.redBus {
+	    		color: #FF0840;
+	    	}
+	    	.orangeBus {
+	    		color: #FF7521;
+	    	}
+			.transitInput {
+				display: block;
+				width: 90%;
+				height: 34px;
+				padding: 6px 12px;
+				font-size: 14px;
+				line-height: 1.428571429;
+				color: #555;
+				vertical-align: middle;
+				background-color: #fff;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+				transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+				margin: 20px;
+			}	    	
+			.busList, .busHeader {
+				cursor: pointer;
+			}
+			.busList {
+				color: #839797;
+			}
+	    </style>
+	</head>
+	<body ng-app="permitCalc">
+
+		<permit-calc></permit-calc>
+		<script src="angular.min.js"></script>
+		<script src="angular-touch.min.js"></script>
+		<script src="app.js"></script>
+	</body>
+</html>
