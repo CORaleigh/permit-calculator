@@ -16,14 +16,16 @@ angular.module('permitCalc', ['ngTouch']).factory('permitFactory', function($htt
 	return {
 		retrict: 'E',
 		// template: '<div><select ng-options="group as group.group for group in groups" ng-model="selectedGroup"></select><br/><select ng-options="param as param for param in params" ng-model="selectedParam"></select><br/>{{selectedGroup[selectedParam]}}<br/><input ng-model="squareFeet"></input><br/>{{calculateValuation() | currency}}<br/>{{calculateBuildingPermit() | currency}}<br/>{{calculatePlanReviewFee(percents.planReview.all) | currency}}<br/>{{calculateElectricalPermit(percents.electricalPermit.all) | currency}}<br/>{{calculatePlumbingPermit(percents.plumbingPermit.all) | currency}}<br/>{{calculateMechanicalPermit(percents.mechanicalPermit.all) | currency}}<br/>{{calculateTotalPrice() | currency}}<br/>{{(totalPrice/valuation) * 100 | number: 2}}%</div>',
-		template: '<table><tbody><tr><td>Building Type</td><td><select ng-options="group as group.group for group in groups" ng-model="selectedGroup"></select></td></tr><tr><td>Construction Type</td><td><select ng-options="param as param for param in params" ng-model="selectedParam"></select></td></tr><tr><td>Valuation Multiplier</td><td>{{selectedGroup[selectedParam]}}</td></tr><tr><td>Square Feet</td><td><input type="number" ng-model="squareFeet"/></td><tr><td>Means Location Factor</td><td>{{meansLocationFactor * 100 | number: 2}}%</td></tr><tr><td>Construction Valuation</td><td>{{calculateValuation() | currency}}</td><tr><td>Building Permit</td><td>{{calculateBuildingPermit() | currency}}</td></tr><tr><td>Plan Review Fee</td><td>{{calculatePlanReviewFee(percents.planReview.all) | currency}}</td></tr><tr><td>Electrical Permit</td><td>{{calculateElectricalPermit(percents.electricalPermit.all) | currency}}</td></tr><tr><td>Plumbing Permit</td><td>{{calculatePlumbingPermit(percents.plumbingPermit.all) | currency}}</td></tr><tr><td>Mechanical Permit</td><td>{{calculateMechanicalPermit(percents.mechanicalPermit.all) | currency}}</td></tr><tr><td><strong>Total Permit Price</strong></td><td><strong>{{calculateTotalPrice() | currency}}</strong></td></tr><tr><td>% of Valuation</td><td>{{(totalPrice/valuation) * 100 | number: 2}}%</td></tr></tbody></table>',
+		template: '<table><tbody><tr><td>Building Type</td><td><select ng-options="group as group.group for group in groups" ng-model="selectedGroup"></select></td></tr><tr><td>Construction Type</td><td><select ng-options="param as param for param in params" ng-model="selectedParam"></select></td></tr><tr><td>Project Type</td><td><select ng-options="projectType as projectType.name for projectType in projectTypes" ng-model="selectedProjectType"></select></td><tr><td>Square Feet</td><td><input type="number" ng-model="squareFeet"/></td></tr><tr><td>Construction Valuation</td><td>{{calculateValuation() | currency}}</td><tr><td>Building Permit</td><td>{{calculateBuildingPermit() | currency}}</td></tr><tr><td>Plan Review Fee</td><td>{{calculatePlanReviewFee(percents.planReview.all) | currency}}</td></tr><tr><td>Electrical Permit</td><td>{{calculateElectricalPermit(percents.electricalPermit.all) | currency}}</td></tr><tr><td>Plumbing Permit</td><td>{{calculatePlumbingPermit(percents.plumbingPermit.all) | currency}}</td></tr><tr><td>Mechanical Permit</td><td>{{calculateMechanicalPermit(percents.mechanicalPermit.all) | currency}}</td></tr><tr><td><strong>Total Permit Price</strong></td><td><strong>{{calculateTotalPrice() | currency}}</strong></td></tr><tr><td>% of Valuation</td><td>{{(totalPrice/valuation) * 100 | number: 2}}%</td></tr></tbody></table>',
 		controller: function ($scope, $rootScope, $filter, $interval, permitFactory, $timeout) {
 			$scope.params = ['IA', 'IB', 'IIA', 'IIB', 'IIIA', 'IIIB', 'IV', 'VA', 'VB'];
 			$scope.meansLocationFactor = 0.838137101;
 
 			$scope.totalPrice = 0;
 			$scope.squareFeet = 0;
-			
+
+			$scope.projectTypes = [{name: 'New Contruction', percent: 1}, {name: 'Level 1 Alteration', percent: 0.25}, {name: 'Level 2 Alteration', percent: 0.5}, {name: 'Level 3 Alteration', percent: 0.75}];
+			$scope.selectedProjectType = $scope.constructionTypes[0];
 			$scope.percents = {buildingPermit: {all: 0.00077944778071331, r3: 0.002616923}, planReview: {all: 0.550907693344574, r3: 0.717419837103396}, electricalPermit: {all: 1.00793835113169, r3: 0.669736429687697}, plumbingPermit: {all: 0.551694198410728, r3: 0.223647600095625}, mechanicalPermit: {all: 0.778591078767941, r3: 0.305407886978742}};
 			permitFactory.getIccBvd().then(function (data) {
 				$scope.groups = data;
@@ -32,6 +34,7 @@ angular.module('permitCalc', ['ngTouch']).factory('permitFactory', function($htt
 
 					if ($scope.selectedGroup && $scope.selectedParam) {
 						$scope.valuation =  $scope.meansLocationFactor * $scope.selectedGroup[$scope.selectedParam] * $scope.squareFeet;
+						$scope.valuation = $scope.valuation * $scope.selectedProjectType.percent;
 					} else {
 						$scope.valuation = 0;
 					}
