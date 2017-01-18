@@ -25,7 +25,7 @@ angular.module('permitCalc', ['ngTouch']).factory('permitFactory', function($htt
 			$scope.squareFeet = 0;
 
 			$scope.projectTypes = [{name: 'New Contruction', percent: 1}, {name: 'Level 1 Alteration', percent: 0.25}, {name: 'Level 2 Alteration', percent: 0.5}, {name: 'Level 3 Alteration', percent: 0.75}];
-			$scope.selectedProjectType = $scope.constructionTypes[0];
+			$scope.selectedProjectType = $scope.projectTypes[0];
 			$scope.percents = {buildingPermit: {all: 0.00077944778071331, r3: 0.002616923}, planReview: {all: 0.550907693344574, r3: 0.717419837103396}, electricalPermit: {all: 1.00793835113169, r3: 0.669736429687697}, plumbingPermit: {all: 0.551694198410728, r3: 0.223647600095625}, mechanicalPermit: {all: 0.778591078767941, r3: 0.305407886978742}};
 			permitFactory.getIccBvd().then(function (data) {
 				$scope.groups = data;
