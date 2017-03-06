@@ -24,7 +24,7 @@ angular.module('permitCalc', ['ngTouch']).factory('permitFactory', function($htt
 			$scope.totalPrice = 0;
 			$scope.squareFeet = 0;
 
-			$scope.constructionScopes = [{name: 'New Contruction', percent: 1}, {name: 'Level 1 Alteration', percent: 0.25}, {name: 'Level 2 Alteration', percent: 0.5}, {name: 'Level 3 Alteration', percent: 0.75}];
+			$scope.constructionScopes = [{name: 'New Construction', percent: 1}, {name: 'Level 1 Alteration', percent: 0.25}, {name: 'Level 2 Alteration', percent: 0.5}, {name: 'Level 3 Alteration', percent: 0.75}];
 			$scope.selectedconstructionScope = $scope.constructionScopes[0];
 			$scope.percents = {buildingPermit: {all: 0.00077944778071331, r3: 0.002616923}, planReview: {all: 0.550907693344574, r3: 0.717419837103396}, electricalPermit: {all: 1.00793835113169, r3: 0.669736429687697}, plumbingPermit: {all: 0.551694198410728, r3: 0.223647600095625}, mechanicalPermit: {all: 0.778591078767941, r3: 0.305407886978742}};
 			permitFactory.getIccBvd().then(function (data) {
@@ -57,12 +57,12 @@ angular.module('permitCalc', ['ngTouch']).factory('permitFactory', function($htt
 						{tier: 6, min: 1000001, max: 5000000, percent: 0.80},
 						{tier: 7, min: 5000001, max: 15000000, percent: 0.70},
 						{tier: 8, min: 15000001, max: 25000000, percent: 0.60},
-						{tier: 9, min: 25000001, max: null, percent: 0.50}																		
+						{tier: 9, min: 25000001, max: null, percent: 0.50}
 					];
 					tiers.forEach(function (tier, i) {
 						tier.costper = ((multiplier * 1000) * tier.percent) * recoveryBasis;
 						if (i === 0) {
-							tier.cumulative = (tier.max / 1000) * tier.costper;						
+							tier.cumulative = (tier.max / 1000) * tier.costper;
 						} else if (i === tiers.length - 1){
 							tier.cumulative = null;
 						}else {
@@ -89,7 +89,7 @@ angular.module('permitCalc', ['ngTouch']).factory('permitFactory', function($htt
 									} else {
 										$scope.buildingPermitFee = ((($scope.valuation - valuationTiers[i - 1]['max'])/1000) * tier.costper) + valuationTiers[i - 1]['cumulative'];
 									}
-									break;								
+									break;
 								}
 
 							}
@@ -99,28 +99,28 @@ angular.module('permitCalc', ['ngTouch']).factory('permitFactory', function($htt
 							// 	$scope.buildingPermitFee = ($scope.valuation/1000) * costPer;
 							// } else if ($scope.valuation > 150001 && $scope.valuation <= 250000) {
 							// 	costPer = getCostPer1000(0.95);
-							// 	cumulative = (((250000 - 150000)/1000) * costPer) + ;								
+							// 	cumulative = (((250000 - 150000)/1000) * costPer) + ;
 							// 	$scope.buildingPermitFee = ((($scope.valuation - 150000)/1000) * costPer) + 116.71;
 							// } else if ($scope.valuation > 250001 && $scope.valuation <= 500000) {
-							// 	costPer = getCostPer1000(0.92);								
+							// 	costPer = getCostPer1000(0.92);
 							// 	$scope.buildingPermitFee = ((($scope.valuation - 250000)/1000) * costPer) + 190.62;
 							// } else if ($scope.valuation > 500001 && $scope.valuation <= 750000) {
-							// 	costPer = getCostPer1000(0.90);								
+							// 	costPer = getCostPer1000(0.90);
 							// 	$scope.buildingPermitFee = ((($scope.valuation - 500000)/1000) * costPer) + 369.58;
 							// } else if ($scope.valuation > 750001 && $scope.valuation <= 1000000) {
-							// 	costPer = getCostPer1000(0.88);								
+							// 	costPer = getCostPer1000(0.88);
 							// 	$scope.buildingPermitFee = ((($scope.valuation - 750000)/1000) * costPer) + 544.64;
 							// } else if ($scope.valuation > 1000001 && $scope.valuation <= 5000000) {
-							// 	costPer = getCostPer1000(0.80);								
+							// 	costPer = getCostPer1000(0.80);
 							// 	$scope.buildingPermitFee = ((($scope.valuation - 750000)/1000) * costPer) + 715.81;
 							// } else if ($scope.valuation > 5000001 && $scope.valuation <= 15000000) {
-							// 	costPer = getCostPer1000(0.70);								
+							// 	costPer = getCostPer1000(0.70);
 							// 	$scope.buildingPermitFee = ((($scope.valuation - 750000)/1000) * costPer) +  3205.58 ;
 							// } else if ($scope.valuation > 15000001 && $scope.valuation <= 25000000) {
-							// 	costPer = getCostPer1000(0.60);								
+							// 	costPer = getCostPer1000(0.60);
 							// 	$scope.buildingPermitFee = ((($scope.valuation - 15000000)/1000) * costPer) +  8651.95 ;
 							// } else if ($scope.valuation > 25000000) {
-							// 	costPer = getCostPer1000(0.50);								
+							// 	costPer = getCostPer1000(0.50);
 							// 	$scope.buildingPermitFee = ((($scope.valuation - 25000000)/1000) * costPer) +  13320.27 ;
 							// }
 						}
