@@ -186,8 +186,8 @@ angular.module('permitCalc', ['ngTouch']).factory('permitFactory', function($htt
 				};
 				$scope.calculateTotalPrice = function () {
 					$scope.totalPrice = $scope.buildingPermitFee + $scope.planReviewFee + $scope.electricalPermit + $scope.plumbingPermit + $scope.mechanicalPermit;
-					if ($scope.totalPrice < 106) {
-						$scope.totalPrice = 106;
+					if ($scope.totalPrice < 530) {
+						$scope.totalPrice = 530;
 					}
 					return $scope.totalPrice;
 
