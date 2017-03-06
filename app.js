@@ -48,16 +48,27 @@ angular.module('permitCalc', ['ngTouch']).factory('permitFactory', function($htt
 				var setValuationTiers = function () {
 					var multiplier = 0.00077944778071331;
 					var recoveryBasis = 1;
+					// var tiers = [
+					// 	{tier: 1, min: 0, max: 150000, percent: 1},
+					// 	{tier: 2, min: 150001, max: 250000, percent: 0.95},
+					// 	{tier: 3, min: 250001, max: 500000, percent: 0.92},
+					// 	{tier: 4, min: 500001, max: 750000, percent: 0.90},
+					// 	{tier: 5, min: 750001, max: 1000000, percent: 0.88},
+					// 	{tier: 6, min: 1000001, max: 5000000, percent: 0.80},
+					// 	{tier: 7, min: 5000001, max: 15000000, percent: 0.70},
+					// 	{tier: 8, min: 15000001, max: 25000000, percent: 0.60},
+					// 	{tier: 9, min: 25000001, max: null, percent: 0.50}
+					// ];
 					var tiers = [
-						{tier: 1, min: 0, max: 150000, percent: 1},
-						{tier: 2, min: 150001, max: 250000, percent: 0.95},
-						{tier: 3, min: 250001, max: 500000, percent: 0.92},
-						{tier: 4, min: 500001, max: 750000, percent: 0.90},
-						{tier: 5, min: 750001, max: 1000000, percent: 0.88},
-						{tier: 6, min: 1000001, max: 5000000, percent: 0.80},
-						{tier: 7, min: 5000001, max: 15000000, percent: 0.70},
-						{tier: 8, min: 15000001, max: 25000000, percent: 0.60},
-						{tier: 9, min: 25000001, max: null, percent: 0.50}
+						{tier: 1, min: 0, max: 150000, percent: 0.78},
+						{tier: 2, min: 150001, max: 250000, percent: 0.74},
+						{tier: 3, min: 250001, max: 500000, percent: 0.72},
+						{tier: 4, min: 500001, max: 750000, percent: 0.70},
+						{tier: 5, min: 750001, max: 1000000, percent: 0.68},
+						{tier: 6, min: 1000001, max: 5000000, percent: 0.62},
+						{tier: 7, min: 5000001, max: 15000000, percent: 0.54},
+						{tier: 8, min: 15000001, max: 25000000, percent: 0.47},
+						{tier: 9, min: 25000001, max: null, percent: 0.39}
 					];
 					tiers.forEach(function (tier, i) {
 						tier.costper = ((multiplier * 1000) * tier.percent) * recoveryBasis;
